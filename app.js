@@ -9,8 +9,9 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/HR_App");
+// Connect to MongoDB using environment variable for connection URI
+const mongoURI = process.env.ATLAS_DATABASE || "mongodb://127.0.0.1:27017/HR_App";
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(cors());
 app.use(cookieParser());
